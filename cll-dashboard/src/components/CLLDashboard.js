@@ -893,172 +893,120 @@ const CLLDashboard = () => {
             <div className="bg-white rounded-lg p-6 shadow-sm">
                 <h3 className="text-xl font-semibold text-gray-800 mb-6 text-center">ESMO 2024 Treatment Decision Flowchart</h3>
                 
-                {/* Root Node - CLL Diagnosis */}
-                <div className="relative flex flex-col items-center">
-                    <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg p-4 mb-3 shadow-lg z-10">
+                {/* Simplified Hierarchical Layout */}
+                <div className="flex flex-col items-center space-y-8">
+                    {/* Root Node */}
+                    <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg p-4 shadow-lg">
                         <h4 className="font-bold text-lg text-center">CLL Diagnosis Confirmed</h4>
                         <p className="text-sm text-center text-blue-100 mt-1">IGHV status & TP53 testing mandatory</p>
                     </div>
 
-                    {/* Connecting Lines and Decision Tree */}
-                    <div className="relative w-full">
-                        {/* Main vertical line from root */}
-                        <svg className="absolute top-0 left-1/2 transform -translate-x-1/2" width="4" height="60" style={{ zIndex: 1 }}>
-                            <line x1="2" y1="0" x2="2" y2="60" stroke="#6B7280" strokeWidth="2"/>
-                        </svg>
+                    {/* Down Arrow */}
+                    <div className="flex items-center justify-center">
+                        <div className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-gray-500"></div>
+                    </div>
 
-                        {/* Horizontal branching line for TP53 status */}
-                        <svg className="absolute top-14 left-1/2 transform -translate-x-1/2" width="400" height="4" style={{ zIndex: 1 }}>
-                            <line x1="0" y1="2" x2="400" y2="2" stroke="#6B7280" strokeWidth="2"/>
-                        </svg>
+                    {/* First Level - TP53 Status */}
+                    <div className="flex justify-center items-center gap-16">
+                        {/* TP53 Wild Type */}
+                        <div className="flex flex-col items-center space-y-6">
+                            <div className="bg-green-100 border-2 border-green-300 rounded-lg p-4">
+                                <h5 className="font-semibold text-green-800 text-center">TP53 Wild Type</h5>
+                                <p className="text-xs text-green-600 text-center">(~95% of patients)</p>
+                            </div>
 
-                        {/* Vertical lines to TP53 boxes */}
-                        <svg className="absolute top-14 left-1/4 transform -translate-x-1/2" width="4" height="30" style={{ zIndex: 1 }}>
-                            <line x1="2" y1="0" x2="2" y2="30" stroke="#6B7280" strokeWidth="2"/>
-                        </svg>
-                        <svg className="absolute top-14 right-1/4 transform translate-x-1/2" width="4" height="30" style={{ zIndex: 1 }}>
-                            <line x1="2" y1="0" x2="2" y2="30" stroke="#6B7280" strokeWidth="2"/>
-                        </svg>
+                            {/* Down Arrow */}
+                            <div className="w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent border-t-gray-400"></div>
 
-                        {/* First Decision Branch - TP53 Status */}
-                        <div className="relative mt-16 mb-6">
-                            <div className="flex justify-center items-center gap-32">
-                                {/* TP53 Wild Type Branch */}
-                                <div className="flex flex-col items-center relative">
-                                    <div className="bg-green-100 border-2 border-green-300 rounded-lg p-3 mb-4 z-10">
-                                        <h5 className="font-semibold text-green-800 text-center">TP53 Wild Type</h5>
-                                        <p className="text-xs text-green-600 text-center">(~95% of patients)</p>
+                            {/* Second Level - IGHV Status */}
+                            <div className="flex gap-8">
+                                {/* Mutated IGHV */}
+                                <div className="flex flex-col items-center space-y-4">
+                                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                                        <h6 className="font-medium text-blue-800 text-sm text-center">Mutated IGHV</h6>
+                                        <p className="text-xs text-blue-600 text-center">(~60%)</p>
                                     </div>
 
-                                    {/* Vertical line to IGHV branches */}
-                                    <svg className="absolute top-20 left-1/2 transform -translate-x-1/2" width="4" height="40" style={{ zIndex: 1 }}>
-                                        <line x1="2" y1="0" x2="2" y2="40" stroke="#6B7280" strokeWidth="2"/>
-                                    </svg>
+                                    {/* Down Arrow */}
+                                    <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-400"></div>
 
-                                    {/* Horizontal line for IGHV branching */}
-                                    <svg className="absolute top-14 left-1/2 transform -translate-x-1/2" width="300" height="4" style={{ zIndex: 1, marginTop: '46px' }}>
-                                        <line x1="0" y1="2" x2="300" y2="2" stroke="#6B7280" strokeWidth="2"/>
-                                    </svg>
-
-                                    {/* Vertical lines to IGHV boxes */}
-                                    <svg className="absolute left-1/3 transform -translate-x-1/2" width="4" height="30" style={{ zIndex: 1, top: '60px' }}>
-                                        <line x1="2" y1="0" x2="2" y2="30" stroke="#6B7280" strokeWidth="2"/>
-                                    </svg>
-                                    <svg className="absolute right-1/3 transform translate-x-1/2" width="4" height="30" style={{ zIndex: 1, top: '60px' }}>
-                                        <line x1="2" y1="0" x2="2" y2="30" stroke="#6B7280" strokeWidth="2"/>
-                                    </svg>
-
-                                    {/* IGHV Status Branch */}
-                                    <div className="flex gap-12 mt-16">
-                                        {/* Mutated IGHV */}
-                                        <div className="flex flex-col items-center relative">
-                                            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 z-10">
-                                                <h6 className="font-medium text-blue-800 text-sm text-center">Mutated IGHV</h6>
-                                                <p className="text-xs text-blue-600 text-center">(~60%)</p>
-                                            </div>
-
-                                            {/* Vertical line to fitness assessment */}
-                                            <svg className="absolute top-16 left-1/2 transform -translate-x-1/2" width="4" height="30" style={{ zIndex: 1 }}>
-                                                <line x1="2" y1="0" x2="2" y2="30" stroke="#6B7280" strokeWidth="2"/>
-                                            </svg>
-
-                                            {/* Horizontal line for fitness branching */}
-                                            <svg className="absolute top-12 left-1/2 transform -translate-x-1/2" width="200" height="4" style={{ zIndex: 1, marginTop: '34px' }}>
-                                                <line x1="0" y1="2" x2="200" y2="2" stroke="#6B7280" strokeWidth="2"/>
-                                            </svg>
-
-                                            {/* Vertical lines to fitness boxes */}
-                                            <svg className="absolute left-1/4 transform -translate-x-1/2" width="4" height="20" style={{ zIndex: 1, top: '46px' }}>
-                                                <line x1="2" y1="0" x2="2" y2="20" stroke="#6B7280" strokeWidth="2"/>
-                                            </svg>
-                                            <svg className="absolute right-1/4 transform translate-x-1/2" width="4" height="20" style={{ zIndex: 1, top: '46px' }}>
-                                                <line x1="2" y1="0" x2="2" y2="20" stroke="#6B7280" strokeWidth="2"/>
-                                            </svg>
-
-                                            {/* Fitness Assessment */}
-                                            <div className="flex gap-4 mt-12">
-                                                {/* Fit Patients */}
-                                                <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm max-w-xs z-10">
-                                                    <h7 className="font-medium text-gray-800 text-xs mb-2 block">Fit/Younger</h7>
-                                                    <div className="space-y-1 text-xs">
-                                                        <div className="bg-green-50 p-1 rounded text-green-700">• VenO [I,A]</div>
-                                                        <div className="bg-purple-50 p-1 rounded text-purple-700">• Ibr+Ven [I,A]</div>
-                                                        <div className="bg-blue-50 p-1 rounded text-blue-700">• Acala±Obi [III,A]</div>
-                                                        <div className="bg-indigo-50 p-1 rounded text-indigo-700">• Zanu [III,A]</div>
-                                                        <div className="bg-gray-50 p-1 rounded text-gray-700">• FCR [I,B]</div>
-                                                    </div>
-                                                </div>
-
-                                                {/* Unfit Patients */}
-                                                <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm max-w-xs z-10">
-                                                    <h7 className="font-medium text-gray-800 text-xs mb-2 block">Unfit/Older</h7>
-                                                    <div className="space-y-1 text-xs">
-                                                        <div className="bg-green-50 p-1 rounded text-green-700">• VenO [I,A]</div>
-                                                        <div className="bg-blue-50 p-1 rounded text-blue-700">• Acala±Obi [I,A]</div>
-                                                        <div className="bg-indigo-50 p-1 rounded text-indigo-700">• Zanu [I,A]</div>
-                                                        <div className="bg-orange-50 p-1 rounded text-orange-700">• Ibr (cardiac) [I,A]</div>
-                                                    </div>
-                                                </div>
+                                    {/* Third Level - Patient Fitness */}
+                                    <div className="flex gap-3">
+                                        <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm w-40">
+                                            <h7 className="font-medium text-gray-800 text-xs mb-2 block text-center">Fit/Younger</h7>
+                                            <div className="space-y-1 text-xs">
+                                                <div className="bg-green-50 p-1 rounded text-green-700">• VenO [I,A]</div>
+                                                <div className="bg-purple-50 p-1 rounded text-purple-700">• Ibr+Ven [I,A]</div>
+                                                <div className="bg-blue-50 p-1 rounded text-blue-700">• Acala±Obi [III,A]</div>
+                                                <div className="bg-indigo-50 p-1 rounded text-indigo-700">• Zanu [III,A]</div>
+                                                <div className="bg-gray-50 p-1 rounded text-gray-700">• FCR [I,B]</div>
                                             </div>
                                         </div>
 
-                                        {/* Unmutated IGHV */}
-                                        <div className="flex flex-col items-center relative">
-                                            <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 mb-4 z-10">
-                                                <h6 className="font-medium text-orange-800 text-sm text-center">Unmutated IGHV</h6>
-                                                <p className="text-xs text-orange-600 text-center">(~40%)</p>
-                                            </div>
-
-                                            {/* Vertical line to treatment options */}
-                                            <svg className="absolute top-16 left-1/2 transform -translate-x-1/2" width="4" height="30" style={{ zIndex: 1 }}>
-                                                <line x1="2" y1="0" x2="2" y2="30" stroke="#6B7280" strokeWidth="2"/>
-                                            </svg>
-
-                                            {/* Treatment Options for Unmutated */}
-                                            <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm max-w-xs mt-8 z-10">
-                                                <h7 className="font-medium text-gray-800 text-xs mb-2 block">All Patients</h7>
-                                                <div className="space-y-1 text-xs">
-                                                    <div className="bg-purple-50 p-1 rounded text-purple-700 font-medium">• Ibr+Ven [I,A] ★</div>
-                                                    <div className="bg-gray-50 p-1 rounded text-gray-700">• Ibr±Rit [I,A]</div>
-                                                    <div className="bg-blue-50 p-1 rounded text-blue-700">• Acala±Obi [III,A]</div>
-                                                    <div className="bg-indigo-50 p-1 rounded text-indigo-700">• Zanu [III,A]</div>
-                                                    <div className="bg-green-50 p-1 rounded text-green-700">• VenO (alt) [I,A]</div>
-                                                </div>
+                                        <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm w-40">
+                                            <h7 className="font-medium text-gray-800 text-xs mb-2 block text-center">Unfit/Older</h7>
+                                            <div className="space-y-1 text-xs">
+                                                <div className="bg-green-50 p-1 rounded text-green-700">• VenO [I,A]</div>
+                                                <div className="bg-blue-50 p-1 rounded text-blue-700">• Acala±Obi [I,A]</div>
+                                                <div className="bg-indigo-50 p-1 rounded text-indigo-700">• Zanu [I,A]</div>
+                                                <div className="bg-orange-50 p-1 rounded text-orange-700">• Ibr (cardiac) [I,A]</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* TP53 Aberrant Branch */}
-                                <div className="flex flex-col items-center relative">
-                                    <div className="bg-red-100 border-2 border-red-300 rounded-lg p-3 mb-4 z-10">
-                                        <h5 className="font-semibold text-red-800 text-center">TP53 Aberrant</h5>
-                                        <p className="text-xs text-red-600 text-center">(~5% of patients)</p>
+                                {/* Unmutated IGHV */}
+                                <div className="flex flex-col items-center space-y-4">
+                                    <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
+                                        <h6 className="font-medium text-orange-800 text-sm text-center">Unmutated IGHV</h6>
+                                        <p className="text-xs text-orange-600 text-center">(~40%)</p>
                                     </div>
 
-                                    {/* Vertical line to treatment options */}
-                                    <svg className="absolute top-20 left-1/2 transform -translate-x-1/2" width="4" height="40" style={{ zIndex: 1 }}>
-                                        <line x1="2" y1="0" x2="2" y2="40" stroke="#6B7280" strokeWidth="2"/>
-                                    </svg>
+                                    {/* Down Arrow */}
+                                    <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-400"></div>
 
-                                    {/* TP53 Treatment Options */}
-                                    <div className="bg-white border border-red-200 rounded-lg p-3 shadow-sm max-w-xs mt-12 z-10">
-                                        <h7 className="font-medium text-red-800 text-xs mb-2 block">Preferred BTKi</h7>
+                                    {/* Treatment Options */}
+                                    <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm w-40">
+                                        <h7 className="font-medium text-gray-800 text-xs mb-2 block text-center">All Patients</h7>
                                         <div className="space-y-1 text-xs">
-                                            <div className="bg-blue-50 p-1 rounded text-blue-700 font-medium">• Acala [I,A] ★</div>
-                                            <div className="bg-indigo-50 p-1 rounded text-indigo-700 font-medium">• Zanu [III,A] ★</div>
-                                            <div className="bg-gray-50 p-1 rounded text-gray-700">• Ibr [I,A]</div>
-                                        </div>
-                                        <h7 className="font-medium text-red-800 text-xs mt-3 mb-1 block">Alternatives</h7>
-                                        <div className="space-y-1 text-xs">
-                                            <div className="bg-green-50 p-1 rounded text-green-700">• Ven (cont) [III,A]</div>
-                                            <div className="bg-purple-50 p-1 rounded text-purple-700">• Ibr+Ven [III,A]</div>
+                                            <div className="bg-purple-50 p-1 rounded text-purple-700 font-medium">• Ibr+Ven [I,A] ★</div>
+                                            <div className="bg-gray-50 p-1 rounded text-gray-700">• Ibr±Rit [I,A]</div>
+                                            <div className="bg-blue-50 p-1 rounded text-blue-700">• Acala±Obi [III,A]</div>
+                                            <div className="bg-indigo-50 p-1 rounded text-indigo-700">• Zanu [III,A]</div>
+                                            <div className="bg-green-50 p-1 rounded text-green-700">• VenO (alt) [I,A]</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        {/* TP53 Aberrant */}
+                        <div className="flex flex-col items-center space-y-6">
+                            <div className="bg-red-100 border-2 border-red-300 rounded-lg p-4">
+                                <h5 className="font-semibold text-red-800 text-center">TP53 Aberrant</h5>
+                                <p className="text-xs text-red-600 text-center">(~5% of patients)</p>
+                            </div>
+
+                            {/* Down Arrow */}
+                            <div className="w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent border-t-gray-400"></div>
+
+                            {/* Treatment Options */}
+                            <div className="bg-white border border-red-200 rounded-lg p-3 shadow-sm w-48">
+                                <h7 className="font-medium text-red-800 text-xs mb-2 block text-center">Preferred BTKi</h7>
+                                <div className="space-y-1 text-xs">
+                                    <div className="bg-blue-50 p-1 rounded text-blue-700 font-medium">• Acala [I,A] ★</div>
+                                    <div className="bg-indigo-50 p-1 rounded text-indigo-700 font-medium">• Zanu [III,A] ★</div>
+                                    <div className="bg-gray-50 p-1 rounded text-gray-700">• Ibr [I,A]</div>
+                                </div>
+                                <h7 className="font-medium text-red-800 text-xs mt-3 mb-1 block text-center">Alternatives</h7>
+                                <div className="space-y-1 text-xs">
+                                    <div className="bg-green-50 p-1 rounded text-green-700">• Ven (cont) [III,A]</div>
+                                    <div className="bg-purple-50 p-1 rounded text-purple-700">• Ibr+Ven [III,A]</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
                     {/* Legend */}
                     <div className="mt-8 p-4 bg-gray-50 rounded-lg w-full">
