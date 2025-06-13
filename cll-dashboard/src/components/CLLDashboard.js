@@ -579,286 +579,292 @@ const CLLDashboard = () => {
         </div>
     );
 
-    const renderMutations = () => (
-        <div className="space-y-6">
-            <InfoBox 
-                title="Genetic Mutations & BCL2 Inhibitor Response" 
-                content="Understanding genetic mutations is crucial for selecting optimal BCL2 inhibitor therapy. ESMO 2024 guidelines strongly recommend venetoclax combinations for high-risk genetic profiles, as they overcome traditional chemotherapy resistance patterns and achieve superior outcomes across all cytogenetic risk groups."
-            />
+    // ESMO 2024 Treatment Plans by Category
+    const treatmentPlans = {
+        firstLine: {
+            mutatedIGHV: {
+                fit: [
+                    { name: 'Venetoclax + Obinutuzumab', grade: 'I, A', duration: '12 cycles', priority: 1 },
+                    { name: 'Ibrutinib + Venetoclax', grade: 'I, A', duration: '15 cycles', priority: 2 },
+                    { name: 'Ibrutinib monotherapy', grade: 'I, A', duration: 'Continuous', priority: 3 },
+                    { name: 'Acalabrutinib ± Obinutuzumab', grade: 'III, A', duration: 'Continuous', priority: 4 },
+                    { name: 'Zanubrutinib', grade: 'III, A', duration: 'Continuous', priority: 5 }
+                ],
+                unfit: [
+                    { name: 'Venetoclax + Obinutuzumab', grade: 'I, A', duration: '12 cycles', priority: 1 },
+                    { name: 'Acalabrutinib ± Obinutuzumab', grade: 'I, A', duration: 'Continuous', priority: 2 },
+                    { name: 'Zanubrutinib', grade: 'I, A', duration: 'Continuous', priority: 3 },
+                    { name: 'Ibrutinib', grade: 'I, A', duration: 'Continuous', priority: 4, note: 'After CV assessment' }
+                ]
+            },
+            unmutatedIGHV: {
+                fit: [
+                    { name: 'Ibrutinib + Venetoclax', grade: 'I, A', duration: '15 cycles', priority: 1 },
+                    { name: 'Ibrutinib monotherapy', grade: 'I, A', duration: 'Continuous', priority: 2 },
+                    { name: 'Acalabrutinib ± Obinutuzumab', grade: 'III, A', duration: 'Continuous', priority: 3 },
+                    { name: 'Zanubrutinib', grade: 'III, A', duration: 'Continuous', priority: 4 },
+                    { name: 'Venetoclax + Obinutuzumab', grade: 'I, A', duration: '12 cycles', priority: 5, note: 'Alternative' }
+                ],
+                unfit: [
+                    { name: 'Venetoclax + Obinutuzumab', grade: 'I, A', duration: '12 cycles', priority: 1 },
+                    { name: 'Acalabrutinib ± Obinutuzumab', grade: 'I, A', duration: 'Continuous', priority: 2 },
+                    { name: 'Zanubrutinib', grade: 'I, A', duration: 'Continuous', priority: 3 },
+                    { name: 'Ibrutinib', grade: 'I, A', duration: 'Continuous', priority: 4, note: 'After CV assessment' }
+                ]
+            },
+            tp53: [
+                { name: 'Acalabrutinib monotherapy', grade: 'I, A', duration: 'Continuous', priority: 1 },
+                { name: 'Zanubrutinib monotherapy', grade: 'III, A', duration: 'Continuous', priority: 2 },
+                { name: 'Ibrutinib monotherapy', grade: 'I, A', duration: 'Continuous', priority: 3 },
+                { name: 'Venetoclax monotherapy', grade: 'III, A', duration: 'Continuous', priority: 4 },
+                { name: 'Ibrutinib + Venetoclax', grade: 'III, A', duration: '15 cycles', priority: 5, note: 'Young patients' },
+                { name: 'Venetoclax + Obinutuzumab', grade: 'III, A', duration: '12 cycles', priority: 6 }
+            ]
+        },
+        relapsed: {
+            afterCIT: [
+                { name: 'Venetoclax + Rituximab', grade: 'I, A', duration: '24 months', priority: 1 },
+                { name: 'Acalabrutinib monotherapy', grade: 'I, A', duration: 'Continuous', priority: 2 },
+                { name: 'Zanubrutinib monotherapy', grade: 'I, A', duration: 'Continuous', priority: 3 },
+                { name: 'Ibrutinib monotherapy', grade: 'I, B', duration: 'Continuous', priority: 4, note: 'Aca/Zanu preferred' }
+            ],
+            afterVenetoclax: {
+                late: [
+                    { name: 'Venetoclax + Rituximab', grade: 'I, A', duration: '24 months', priority: 1, note: '≥36 months' },
+                    { name: 'Acalabrutinib monotherapy', grade: 'I, A', duration: 'Continuous', priority: 2 },
+                    { name: 'Zanubrutinib monotherapy', grade: 'I, A', duration: 'Continuous', priority: 3 }
+                ],
+                early: [
+                    { name: 'Acalabrutinib monotherapy', grade: 'II, B', duration: 'Continuous', priority: 1 },
+                    { name: 'Zanubrutinib monotherapy', grade: 'II, B', duration: 'Continuous', priority: 2 },
+                    { name: 'Ibrutinib monotherapy', grade: 'II, B', duration: 'Continuous', priority: 3 },
+                    { name: 'Venetoclax + Rituximab', grade: 'II, B', duration: '24 months', priority: 4, note: '<36 months' }
+                ]
+            },
+            afterBTKi: [
+                { name: 'Venetoclax + Rituximab', grade: 'III, A', duration: '24 months', priority: 1 },
+                { name: 'Alternative BTKi', grade: 'III, B', duration: 'Continuous', priority: 2, note: 'If stopped for toxicity' }
+            ],
+            tp53: [
+                { name: 'Acalabrutinib monotherapy', grade: 'I, A', duration: 'Continuous', priority: 1 },
+                { name: 'Zanubrutinib monotherapy', grade: 'I, A', duration: 'Continuous', priority: 2 },
+                { name: 'Ibrutinib monotherapy', grade: 'I, A', duration: 'Continuous', priority: 3 },
+                { name: 'Venetoclax + Rituximab', grade: 'I, A', duration: '24 months', priority: 4 },
+                { name: 'Venetoclax monotherapy', grade: 'III, B', duration: 'Continuous', priority: 5 },
+                { name: 'Allogeneic SCT', grade: 'IV, B', duration: 'Once', priority: 6, note: 'Fit patients' }
+            ]
+        }
+    };
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">IGHV Mutation Status</h3>
-                    <ResponsiveContainer width="100%" height={300}>
-                        <PieChart>
-                            <Pie
-                                data={ighvStatusData}
-                                cx="50%"
-                                cy="50%"
-                                labelLine={false}
-                                label={(entry) => `${entry.status.split(' ')[0]}: ${entry.percentage}%`}
-                                outerRadius={100}
-                                fill="#8884d8"
-                                dataKey="percentage"
-                            >
-                                {ighvStatusData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={entry.color} />
-                                ))}
-                            </Pie>
-                            <Tooltip />
-                        </PieChart>
-                    </ResponsiveContainer>
-                    <div className="mt-4 space-y-2">
-                        {ighvStatusData.map((item, index) => (
-                            <div key={index} className="flex items-center justify-between text-sm">
-                                <div className="flex items-center">
-                                    <div className={`w-3 h-3 rounded-full mr-2`} style={{backgroundColor: item.color}}></div>
-                                    <span className="font-medium">{item.status}</span>
+    const TreatmentPlanCard = ({ title, treatments, color = "blue" }) => (
+        <div className="bg-white rounded-2xl shadow-lg p-6">
+            <h4 className={`text-lg font-bold mb-4 text-${color}-900`}>{title}</h4>
+            <div className="space-y-3">
+                {treatments.map((treatment, index) => (
+                    <div key={index} className={`border-l-4 border-${color}-500 pl-4 py-2 bg-${color}-50 rounded-r-lg`}>
+                        <div className="flex justify-between items-start">
+                            <div className="flex-1">
+                                <p className="font-semibold text-gray-900">{treatment.priority}. {treatment.name}</p>
+                                <div className="flex items-center space-x-4 mt-1">
+                                    <span className={`text-xs px-2 py-1 rounded-full bg-${color}-100 text-${color}-800 font-medium`}>
+                                        {treatment.grade}
+                                    </span>
+                                    <span className="text-xs text-gray-600">
+                                        Duration: {treatment.duration}
+                                    </span>
                                 </div>
-                                <span className="text-gray-600">Median survival: {item.survival}</span>
+                                {treatment.note && (
+                                    <p className="text-xs text-gray-500 mt-1 italic">Note: {treatment.note}</p>
+                                )}
                             </div>
-                        ))}
+                        </div>
                     </div>
-                </div>
-
-                <div className="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">Cytogenetic Risk Groups</h3>
-                    <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={cytogeneticRiskData}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="risk" />
-                            <YAxis />
-                            <Tooltip />
-                            <Bar dataKey="percentage" fill="#6366F1">
-                                {cytogeneticRiskData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={
-                                        entry.risk === 'Very High' ? '#EF4444' :
-                                        entry.risk === 'High' ? '#F59E0B' :
-                                        entry.risk === 'Intermediate' ? '#8B5CF6' : '#10B981'
-                                    } />
-                                ))}
-                            </Bar>
-                        </BarChart>
-                    </ResponsiveContainer>
-                    <div className="mt-4 space-y-2">
-                        {cytogeneticRiskData.map((item, index) => (
-                            <div key={index} className="text-xs">
-                                <span className="font-semibold">{item.risk} Risk ({item.percentage}%):</span>
-                                <span className="text-gray-600 ml-2">{item.markers} - Median survival: {item.median_survival} years</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                ))}
             </div>
-
-            <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="text-xl font-bold mb-4">Common Mutations in CLL</h3>
-                <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr className="border-b-2 border-gray-200">
-                                <th className="text-left py-3 px-4 font-semibold">Mutation</th>
-                                <th className="text-left py-3 px-4 font-semibold">Prevalence</th>
-                                <th className="text-left py-3 px-4 font-semibold">Prognosis</th>
-                                <th className="text-left py-3 px-4 font-semibold">Treatment Impact</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {mutationData.map((mutation, index) => (
-                                <tr key={index} className="border-b border-gray-100">
-                                    <td className="py-3 px-4 font-medium">{mutation.mutation}</td>
-                                    <td className="py-3 px-4">{mutation.prevalence}%</td>
-                                    <td className="py-3 px-4">
-                                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                            mutation.prognosis === 'Very Poor' ? 'bg-red-100 text-red-800' :
-                                            mutation.prognosis === 'Poor' ? 'bg-orange-100 text-orange-800' :
-                                            mutation.prognosis === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
-                                            'bg-green-100 text-green-800'
-                                        }`}>
-                                            {mutation.prognosis}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-4 text-gray-600">{mutation.treatment}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <SourcesBox sources={[
-                "Döhner H, et al. Genomic aberrations and survival in chronic lymphocytic leukemia. N Engl J Med. 2000;343(26):1910-1916.",
-                "Kipps TJ, et al. Chronic lymphocytic leukaemia. Nat Rev Dis Primers. 2017;3:16096.",
-                "Damle RN, et al. Ig V gene mutation status and CD38 expression as novel prognostic indicators in chronic lymphocytic leukemia. Blood. 1999;94(6):1840-1847.",
-                "Hamblin TJ, et al. Unmutated Ig V(H) genes are associated with a more aggressive form of chronic lymphocytic leukemia. Blood. 1999;94(6):1848-1854.",
-                "Zenz T, et al. TP53 mutation and survival in chronic lymphocytic leukemia. J Clin Oncol. 2010;28(29):4473-4479.",
-                "Puente XS, et al. Whole-genome sequencing identifies recurrent mutations in chronic lymphocytic leukaemia. Nature. 2011;475(7354):101-105.",
-                "Malcikova J, et al. ERIC recommendations for TP53 mutation analysis in chronic lymphocytic leukemia-update on methodological approaches. Leukemia. 2018;32(5):1070-1080."
-            ]} />
         </div>
     );
 
-    const renderGeneralInfo = () => (
+    const renderTreatmentPlans = () => (
         <div className="space-y-6">
-            <InfoBox 
-                title="About Chronic Lymphocytic Leukemia" 
-                content="CLL is a type of cancer that affects white blood cells called lymphocytes. It is the most common type of leukemia in adults in Western countries and typically affects older individuals."
+            <InfoBox
+                title="ESMO 2024 Evidence-Based Treatment Plans"
+                content="This section provides comprehensive treatment algorithms based on the latest ESMO 2024 guidelines. Treatment plans are organized by patient fitness, genetic risk profile, and line of therapy. Evidence grades follow ESMO methodology: I (randomized trials), II (prospective/retrospective studies), III (expert opinion), IV (case reports). Recommendation grades: A (strong), B (moderate), C (weak)."
             />
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">What is CLL?</h3>
-                    <div className="space-y-4">
-                        <div className="border-l-4 border-blue-500 pl-4">
-                            <h4 className="font-semibold text-blue-800 mb-1">Definition</h4>
-                            <p className="text-sm text-gray-600">A cancer of B-lymphocytes that accumulate in blood, bone marrow, lymph nodes, and organs</p>
-                        </div>
-                        <div className="border-l-4 border-green-500 pl-4">
-                            <h4 className="font-semibold text-green-800 mb-1">Characteristics</h4>
-                            <p className="text-sm text-gray-600">Slow-growing (indolent) cancer with variable progression rates</p>
-                        </div>
-                        <div className="border-l-4 border-purple-500 pl-4">
-                            <h4 className="font-semibold text-purple-800 mb-1">Diagnosis</h4>
-                            <p className="text-sm text-gray-600">Requires ≥5,000 clonal B-cells/μL in peripheral blood for ≥3 months</p>
-                        </div>
-                    </div>
-                </div>
+            {/* First-Line Treatment Plans */}
+            <div className="bg-gradient-to-r from-green-600 to-green-700 text-white rounded-2xl p-6 mb-6">
+                <h2 className="text-2xl font-bold mb-2">First-Line Treatment Plans</h2>
+                <p className="text-green-100">ESMO 2024 Recommendations for Treatment-Naive CLL Patients</p>
+            </div>
 
-                <div className="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">Symptoms & Signs</h3>
-                    <div className="space-y-3">
-                        <div>
-                            <h4 className="font-semibold text-gray-800 mb-2">Common Symptoms</h4>
-                            <ul className="text-sm text-gray-600 space-y-1">
-                                <li>• Enlarged lymph nodes (painless)</li>
-                                <li>• Fatigue and weakness</li>
-                                <li>• Frequent infections</li>
-                                <li>• Easy bruising or bleeding</li>
-                                <li>• Unintentional weight loss</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="font-semibold text-gray-800 mb-2">B-Symptoms</h4>
-                            <ul className="text-sm text-gray-600 space-y-1">
-                                <li>• Fever &gt;38°C without infection</li>
-                                <li>• Drenching night sweats</li>
-                                <li>• Weight loss &gt;10% in 6 months</li>
-                            </ul>
-                        </div>
-                    </div>
+            {/* Mutated IGHV First-Line */}
+            <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                    <div className="w-4 h-4 bg-green-500 rounded-full mr-3"></div>
+                    Mutated IGHV (Favorable Risk)
+                </h3>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <TreatmentPlanCard
+                        title="Fit/Younger Patients"
+                        treatments={treatmentPlans.firstLine.mutatedIGHV.fit}
+                        color="green"
+                    />
+                    <TreatmentPlanCard
+                        title="Unfit/Older Patients"
+                        treatments={treatmentPlans.firstLine.mutatedIGHV.unfit}
+                        color="emerald"
+                    />
                 </div>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="text-xl font-bold mb-4">Staging Systems</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 className="font-semibold text-gray-800 mb-3">Binet Staging (Europe)</h4>
-                        <div className="space-y-2">
-                            <div className="bg-green-50 rounded-lg p-3">
-                                <h5 className="font-medium text-green-800">Stage A</h5>
-                                <p className="text-sm text-green-700">&lt;3 lymph node areas enlarged</p>
-                                <p className="text-xs text-green-600">Median survival: &gt;10 years</p>
-                            </div>
-                            <div className="bg-yellow-50 rounded-lg p-3">
-                                <h5 className="font-medium text-yellow-800">Stage B</h5>
-                                <p className="text-sm text-yellow-700">≥3 lymph node areas enlarged</p>
-                                <p className="text-xs text-yellow-600">Median survival: 5-7 years</p>
-                            </div>
-                            <div className="bg-red-50 rounded-lg p-3">
-                                <h5 className="font-medium text-red-800">Stage C</h5>
-                                <p className="text-sm text-red-700">Anemia (Hb &lt;10 g/dL) or thrombocytopenia (&lt;100×10⁹/L)</p>
-                                <p className="text-xs text-red-600">Median survival: 2-4 years</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 className="font-semibold text-gray-800 mb-3">Rai Staging (US)</h4>
-                        <div className="space-y-2">
-                            <div className="bg-green-50 rounded-lg p-3">
-                                <h5 className="font-medium text-green-800">Stage 0</h5>
-                                <p className="text-sm text-green-700">Lymphocytosis only</p>
-                                <p className="text-xs text-green-600">Low risk</p>
-                            </div>
-                            <div className="bg-yellow-50 rounded-lg p-3">
-                                <h5 className="font-medium text-yellow-800">Stage I-II</h5>
-                                <p className="text-sm text-yellow-700">+ Lymphadenopathy ± organomegaly</p>
-                                <p className="text-xs text-yellow-600">Intermediate risk</p>
-                            </div>
-                            <div className="bg-red-50 rounded-lg p-3">
-                                <h5 className="font-medium text-red-800">Stage III-IV</h5>
-                                <p className="text-sm text-red-700">+ Anemia or thrombocytopenia</p>
-                                <p className="text-xs text-red-600">High risk</p>
-                            </div>
-                        </div>
-                    </div>
+            {/* Unmutated IGHV First-Line */}
+            <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                    <div className="w-4 h-4 bg-orange-500 rounded-full mr-3"></div>
+                    Unmutated IGHV (High Risk)
+                </h3>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <TreatmentPlanCard
+                        title="Fit/Younger Patients"
+                        treatments={treatmentPlans.firstLine.unmutatedIGHV.fit}
+                        color="orange"
+                    />
+                    <TreatmentPlanCard
+                        title="Unfit/Older Patients"
+                        treatments={treatmentPlans.firstLine.unmutatedIGHV.unfit}
+                        color="amber"
+                    />
                 </div>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="text-xl font-bold mb-4">Treatment Indications</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 className="font-semibold text-gray-800 mb-3">When to Treat</h4>
-                        <ul className="text-sm text-gray-600 space-y-2">
-                            <li className="flex items-start">
-                                <span className="text-red-500 mr-2">•</span>
-                                Progressive lymphadenopathy or organomegaly
-                            </li>
-                            <li className="flex items-start">
-                                <span className="text-red-500 mr-2">•</span>
-                                Worsening anemia (Hb &lt;10 g/dL)
-                            </li>
-                            <li className="flex items-start">
-                                <span className="text-red-500 mr-2">•</span>
-                                Thrombocytopenia (&lt;100×10⁹/L)
-                            </li>
-                            <li className="flex items-start">
-                                <span className="text-red-500 mr-2">•</span>
-                                Constitutional symptoms (B-symptoms)
-                            </li>
-                            <li className="flex items-start">
-                                <span className="text-red-500 mr-2">•</span>
-                                Recurrent infections
-                            </li>
-                            <li className="flex items-start">
-                                <span className="text-red-500 mr-2">•</span>
-                                Lymphocyte doubling time &lt;6 months
-                            </li>
+            {/* TP53 Aberrant First-Line */}
+            <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                    <div className="w-4 h-4 bg-red-500 rounded-full mr-3"></div>
+                    TP53 Mutation/del(17p) (Very High Risk)
+                </h3>
+                <div className="grid grid-cols-1 gap-6">
+                    <TreatmentPlanCard
+                        title="All Patients - BTKi Preferred"
+                        treatments={treatmentPlans.firstLine.tp53}
+                        color="red"
+                    />
+                </div>
+            </div>
+
+            {/* Relapsed/Refractory Treatment Plans */}
+            <div className="bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-2xl p-6 mb-6 mt-12">
+                <h2 className="text-2xl font-bold mb-2">Relapsed/Refractory Treatment Plans</h2>
+                <p className="text-purple-100">ESMO 2024 Recommendations Based on Prior Therapy</p>
+            </div>
+
+            {/* After Chemoimmunotherapy */}
+            <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                    <div className="w-4 h-4 bg-blue-500 rounded-full mr-3"></div>
+                    After Chemoimmunotherapy (CIT)
+                </h3>
+                <div className="grid grid-cols-1 gap-6">
+                    <TreatmentPlanCard
+                        title="Equal Options - Patient/Physician Choice"
+                        treatments={treatmentPlans.relapsed.afterCIT}
+                        color="blue"
+                    />
+                </div>
+            </div>
+
+            {/* After Venetoclax */}
+            <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                    <div className="w-4 h-4 bg-indigo-500 rounded-full mr-3"></div>
+                    After Venetoclax-Based Therapy
+                </h3>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <TreatmentPlanCard
+                        title="Late Relapse (≥36 months)"
+                        treatments={treatmentPlans.relapsed.afterVenetoclax.late}
+                        color="indigo"
+                    />
+                    <TreatmentPlanCard
+                        title="Early Relapse (<36 months)"
+                        treatments={treatmentPlans.relapsed.afterVenetoclax.early}
+                        color="violet"
+                    />
+                </div>
+            </div>
+
+            {/* After BTKi */}
+            <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                    <div className="w-4 h-4 bg-cyan-500 rounded-full mr-3"></div>
+                    After BTK Inhibitor Therapy
+                </h3>
+                <div className="grid grid-cols-1 gap-6">
+                    <TreatmentPlanCard
+                        title="Progression on BTKi - Venetoclax Preferred"
+                        treatments={treatmentPlans.relapsed.afterBTKi}
+                        color="cyan"
+                    />
+                </div>
+            </div>
+
+            {/* TP53 Aberrant Relapsed */}
+            <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                    <div className="w-4 h-4 bg-red-500 rounded-full mr-3"></div>
+                    TP53 Mutation/del(17p) - Relapsed
+                </h3>
+                <div className="grid grid-cols-1 gap-6">
+                    <TreatmentPlanCard
+                        title="Very High Risk - Consider Allogeneic SCT"
+                        treatments={treatmentPlans.relapsed.tp53}
+                        color="red"
+                    />
+                </div>
+            </div>
+
+            {/* Key Considerations */}
+            <div className="bg-white rounded-2xl shadow-lg p-6 mt-8">
+                <h3 className="text-xl font-bold mb-4 text-gray-900">Key ESMO 2024 Treatment Considerations</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="bg-blue-50 rounded-xl p-4">
+                        <h4 className="font-semibold text-blue-900 mb-2">Time-Limited Preference</h4>
+                        <ul className="text-sm text-blue-800 space-y-1">
+                            <li>• Fixed-duration therapy preferred when efficacy equivalent</li>
+                            <li>• Allows treatment-free intervals</li>
+                            <li>• Enables retreatment options</li>
+                            <li>• Reduces cumulative toxicity</li>
                         </ul>
                     </div>
-                    <div>
-                        <h4 className="font-semibold text-gray-800 mb-3">Watch and Wait</h4>
-                        <div className="bg-blue-50 rounded-lg p-4">
-                            <p className="text-sm text-blue-800 mb-2">
-                                <strong>Many CLL patients don't need immediate treatment</strong>
-                            </p>
-                            <p className="text-xs text-blue-700">
-                                Regular monitoring with blood tests and physical examinations is appropriate 
-                                for asymptomatic patients with early-stage disease. Treatment is started 
-                                only when symptoms develop or disease progresses.
-                            </p>
-                        </div>
-                        <div className="mt-4">
-                            <h5 className="font-medium text-gray-700 mb-2">Monitoring Schedule</h5>
-                            <ul className="text-xs text-gray-600 space-y-1">
-                                <li>• Every 3-6 months for early stage</li>
-                                <li>• Every 2-3 months for progressive disease</li>
-                                <li>• Annual imaging if lymphadenopathy present</li>
-                            </ul>
-                        </div>
+                    <div className="bg-green-50 rounded-xl p-4">
+                        <h4 className="font-semibold text-green-900 mb-2">MRD-Guided Therapy</h4>
+                        <ul className="text-sm text-green-800 space-y-1">
+                            <li>• Personalized treatment duration</li>
+                            <li>• Improved outcomes in FLAIR trial</li>
+                            <li>• Future standard of care</li>
+                            <li>• Currently research setting</li>
+                        </ul>
+                    </div>
+                    <div className="bg-purple-50 rounded-xl p-4">
+                        <h4 className="font-semibold text-purple-900 mb-2">Patient Selection</h4>
+                        <ul className="text-sm text-purple-800 space-y-1">
+                            <li>• Mandatory genetic testing (IGHV, TP53)</li>
+                            <li>• Cardiac assessment for BTKi</li>
+                            <li>• Renal function for venetoclax</li>
+                            <li>• Patient preference important</li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
             <SourcesBox sources={[
-                "Hallek M, et al. iwCLL guidelines for diagnosis, indications for treatment, response assessment, and supportive management of CLL. Blood. 2018;131(25):2745-2760.",
-                "Binet JL, et al. A new prognostic classification of chronic lymphocytic leukemia derived from a multivariate survival analysis. Cancer. 1981;48(1):198-206.",
-                "Rai KR, et al. Clinical staging of chronic lymphocytic leukemia. Blood. 1975;46(2):219-234.",
-                "Chiorazzi N, et al. Chronic lymphocytic leukemia. N Engl J Med. 2005;352(8):804-815.",
-                "Swerdlow SH, et al. WHO Classification of Tumours of Haematopoietic and Lymphoid Tissues. 4th ed. Lyon: IARC; 2017.",
-                "Rawstron AC, et al. Monoclonal B-cell lymphocytosis and chronic lymphocytic leukemia. N Engl J Med. 2008;359(6):575-583.",
-                "National Cancer Institute. Chronic Lymphocytic Leukemia Treatment (PDQ®). Health Professional Version. Available at: https://www.cancer.gov/types/leukemia/hp/cll-treatment-pdq"
+                "Eichhorst B, Ghia P, Niemann CU, et al. ESMO Clinical Practice Guideline interim update on new targeted therapies in the first line and at relapse of chronic lymphocytic leukaemia. Ann Oncol. 2024;35(9):762-768.",
+                "Munir T, Cairns DA, Bloor A, et al. Chronic lymphocytic leukemia therapy guided by measurable residual disease. N Engl J Med. 2023;390(4):326-337.",
+                "Tam CS, Allan JN, Siddiqi T, et al. Fixed-duration ibrutinib plus venetoclax for first-line treatment of CLL. Blood. 2022;139(22):3278-3289.",
+                "Al-Sawaf O, Zhang C, Tandon M, et al. Venetoclax plus obinutuzumab versus chlorambucil plus obinutuzumab. Lancet Oncol. 2020;21(9):1188-1200.",
+                "Kater AP, Owen C, Moreno C, et al. Fixed-duration ibrutinib-venetoclax in patients with chronic lymphocytic leukemia. NEJM Evid. 2022;1(7):EVIDoa2200006.",
+                "Brown JR, Eichhorst B, Hillmen P, et al. Zanubrutinib or ibrutinib in relapsed or refractory chronic lymphocytic leukemia. N Engl J Med. 2023;388(4):319-332.",
+                "Seymour JF, Kipps TJ, Eichhorst B, et al. Venetoclax-rituximab in relapsed or refractory chronic lymphocytic leukemia. N Engl J Med. 2018;378(12):1107-1120."
             ]} />
         </div>
     );
@@ -869,6 +875,7 @@ const CLLDashboard = () => {
         { id: 'aging', label: 'Aging Impact', icon: TrendingUp },
         { id: 'mutations', label: 'Mutations & Genetics', icon: Dna },
         { id: 'treatments', label: 'Treatments', icon: Pill },
+        { id: 'treatment-plans', label: 'ESMO 2024 Treatment Plans', icon: Pill },
         { id: 'info', label: 'General Information', icon: BookOpen }
     ];
 
@@ -926,6 +933,7 @@ const CLLDashboard = () => {
                 {activeSection === 'aging' && renderAgingImpact()}
                 {activeSection === 'mutations' && renderMutations()}
                 {activeSection === 'treatments' && renderTreatments()}
+                {activeSection === 'treatment-plans' && renderTreatmentPlans()}
                 {activeSection === 'info' && renderGeneralInfo()}
             </div>
 
