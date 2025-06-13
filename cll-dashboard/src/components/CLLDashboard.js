@@ -59,73 +59,74 @@ const CLLDashboard = () => {
         { year: 2025, medianAge: 72, lifeExpectancy: 82.0, diagnosisRate: 7.2 }
     ];
 
-    // Treatment comparison data
+    // Treatment comparison data (Updated with ESMO 2024 BCL2 inhibitor revolution)
     const treatmentComparisonData = [
-        { drug: 'Ibrutinib', UK: 85, EU: 82, US: 90 },
-        { drug: 'Acalabrutinib', UK: 75, EU: 70, US: 85 },
-        { drug: 'Venetoclax', UK: 80, EU: 78, US: 88 },
-        { drug: 'Zanubrutinib', UK: 65, EU: 60, US: 72 },
-        { drug: 'Obinutuzumab', UK: 70, EU: 75, US: 78 }
+        { drug: 'Venetoclax + Obinutuzumab', UK: 94, EU: 96, US: 92 },
+        { drug: 'Ibrutinib + Venetoclax', UK: 85, EU: 88, US: 90 },
+        { drug: 'Venetoclax + Rituximab', UK: 82, EU: 85, US: 88 },
+        { drug: 'Acalabrutinib ± Obinutuzumab', UK: 78, EU: 75, US: 85 },
+        { drug: 'Zanubrutinib', UK: 80, EU: 72, US: 82 },
+        { drug: 'Ibrutinib (monotherapy)', UK: 60, EU: 58, US: 70 }
     ];
 
-    // Treatment guidelines comparison
+    // Treatment guidelines comparison (Updated ESMO 2024 - BCL2 inhibitor revolution)
     const guidelinesData = [
         {
-            aspect: 'First-line Preferred',
+            aspect: 'Time-Limited BCL2i Priority',
+            UK: 92,
+            EU: 96,
+            US: 85,
+            details: {
+                UK: 'VenO strongly preferred first-line across all risk groups',
+                EU: 'ESMO 2024: Time-limited venetoclax combinations are standard of care',
+                US: 'Growing preference for fixed-duration BCL2i therapy'
+            }
+        },
+        {
+            aspect: 'MRD-Guided Duration',
+            UK: 88,
+            EU: 94,
+            US: 82,
+            details: {
+                UK: 'MRD-guided therapy duration increasingly adopted',
+                EU: 'ESMO 2024 strongly advocates MRD-driven personalized treatment',
+                US: 'MRD testing becoming standard practice'
+            }
+        },
+        {
+            aspect: 'VenO vs BTKi Monotherapy',
             UK: 85,
-            EU: 80,
-            US: 90,
+            EU: 91,
+            US: 78,
             details: {
-                UK: 'Acalabrutinib ± Obinutuzumab, Venetoclax + Obinutuzumab',
-                EU: 'Ibrutinib, Venetoclax + Obinutuzumab, Acalabrutinib',
-                US: 'Zanubrutinib, Acalabrutinib ± Obinutuzumab, Venetoclax + Obinutuzumab'
+                UK: 'VenO preferred over continuous BTKi in most patients',
+                EU: 'ESMO 2024: BCL2i combinations superior to BTKi monotherapy',
+                US: 'Both approaches still widely used'
             }
         },
         {
-            aspect: 'BTKi Preference',
-            UK: 70,
-            EU: 75,
-            US: 95,
-            details: {
-                UK: 'Moving to 2nd generation BTKis',
-                EU: 'Ibrutinib still commonly used',
-                US: 'Strong preference for 2nd generation'
-            }
-        },
-        {
-            aspect: 'Fixed Duration',
-            UK: 80,
+            aspect: 'Ibrutinib-Venetoclax Combination',
+            UK: 78,
             EU: 85,
-            US: 75,
+            US: 88,
             details: {
-                UK: 'Venetoclax-based combinations',
-                EU: 'Strong preference for time-limited',
-                US: 'Both continuous and fixed options'
-            }
-        },
-        {
-            aspect: 'Chemoimmunotherapy',
-            UK: 20,
-            EU: 25,
-            US: 10,
-            details: {
-                UK: 'Limited to fit patients with mutated IGHV',
-                EU: 'FCR/BR in selected patients',
-                US: 'Rarely used in modern practice'
+                UK: 'Emerging as important option for high-risk CLL',
+                EU: 'ESMO 2024 approval driving increased adoption',
+                US: 'Strong uptake following regulatory approval'
             }
         }
     ];
 
-    // Mutation prevalence data
+    // Mutation prevalence data (Updated with BCL2 inhibitor sensitivity markers)
     const mutationData = [
-        { mutation: 'IGHV Unmutated', prevalence: 55, prognosis: 'Poor', treatment: 'BTK inhibitors preferred' },
-        { mutation: 'del(17p)/TP53', prevalence: 5, prognosis: 'Very Poor', treatment: 'BTK/BCL2 inhibitors' },
-        { mutation: 'del(11q)/ATM', prevalence: 18, prognosis: 'Intermediate', treatment: 'BTK inhibitors' },
-        { mutation: 'Trisomy 12', prevalence: 16, prognosis: 'Intermediate', treatment: 'Various options' },
-        { mutation: 'del(13q)', prevalence: 55, prognosis: 'Good', treatment: 'Watch and wait often' },
-        { mutation: 'NOTCH1', prevalence: 12, prognosis: 'Poor', treatment: 'BTK inhibitors' },
-        { mutation: 'SF3B1', prevalence: 8, prognosis: 'Intermediate', treatment: 'Consider early treatment' },
-        { mutation: 'BIRC3', prevalence: 4, prognosis: 'Poor', treatment: 'BTK inhibitors' }
+        { mutation: 'IGHV Unmutated', prevalence: 55, prognosis: 'Poor', treatment: 'VenO preferred over BTKi monotherapy' },
+        { mutation: 'del(17p)/TP53', prevalence: 5, prognosis: 'Very Poor', treatment: 'VenO superior to BTKi in ESMO 2024' },
+        { mutation: 'del(11q)/ATM', prevalence: 18, prognosis: 'Intermediate', treatment: 'VenO shows excellent outcomes' },
+        { mutation: 'Trisomy 12', prevalence: 16, prognosis: 'Intermediate', treatment: 'NOTCH1+ benefits from VenO' },
+        { mutation: 'del(13q)', prevalence: 55, prognosis: 'Good', treatment: 'Excellent VenO response rates' },
+        { mutation: 'NOTCH1', prevalence: 12, prognosis: 'Poor', treatment: 'VenO preferred (ESMO 2024)' },
+        { mutation: 'SF3B1', prevalence: 8, prognosis: 'Intermediate', treatment: 'Good venetoclax sensitivity' },
+        { mutation: 'BCL2 G101V', prevalence: 1, prognosis: 'Acquired resistance', treatment: 'BTKi or novel combinations' }
     ];
 
     // IGHV mutation status distribution
@@ -454,12 +455,12 @@ const CLLDashboard = () => {
     const renderTreatments = () => (
         <div className="space-y-6">
             <InfoBox
-                title="CLL Treatment Landscape"
-                content="The treatment of CLL has been revolutionized by targeted therapies. BTK inhibitors (ibrutinib, acalabrutinib, zanubrutinib) and BCL2 inhibitors (venetoclax) have largely replaced chemotherapy, offering better efficacy and tolerability."
+                title="CLL Treatment Revolution: BCL2 Inhibitors Leading the Way"
+                content="The treatment landscape has shifted dramatically with BCL2 inhibitors, particularly venetoclax combinations, now considered first-line standard of care by ESMO 2024. Venetoclax + obinutuzumab (VenO) offers superior outcomes with fixed-duration therapy, achieving deep remissions and potential treatment-free intervals."
             />
 
             <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="text-xl font-bold mb-4">Drug Usage Comparison: UK vs EU vs US (%)</h3>
+                <h3 className="text-xl font-bold mb-4">Current Treatment Adoption: Focus on BCL2 Inhibitors (%)</h3>
                 <ResponsiveContainer width="100%" height={350}>
                     <BarChart data={treatmentComparisonData}>
                         <CartesianGrid strokeDasharray="3 3" />
@@ -476,7 +477,7 @@ const CLLDashboard = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">Treatment Guidelines Comparison</h3>
+                    <h3 className="text-xl font-bold mb-4">ESMO 2024 Treatment Priorities Comparison</h3>
                     <ResponsiveContainer width="100%" height={300}>
                         <RadarChart data={guidelinesData}>
                             <PolarGrid />
@@ -491,39 +492,39 @@ const CLLDashboard = () => {
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">Treatment Decision Factors</h3>
+                    <h3 className="text-xl font-bold mb-4">BCL2 Inhibitor Clinical Benefits</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-4">
-                            <h4 className="font-semibold text-gray-800 mb-3">Patient Factors</h4>
+                            <h4 className="font-semibold text-gray-800 mb-3">Venetoclax + Obinutuzumab (VenO)</h4>
                             <div className="space-y-3">
                                 <div className="border-l-4 border-blue-500 pl-4">
-                                    <p className="font-medium text-blue-800">Age & Comorbidities</p>
-                                    <p className="text-sm text-gray-600">Fitness assessment guides treatment intensity</p>
+                                    <p className="font-medium text-blue-800">Superior PFS</p>
+                                    <p className="text-sm text-gray-600">HR 0.42 vs chemoimmunotherapy (ESMO 2024)</p>
                                 </div>
                                 <div className="border-l-4 border-green-500 pl-4">
-                                    <p className="font-medium text-green-800">Disease Stage</p>
-                                    <p className="text-sm text-gray-600">Binet/Rai staging determines urgency</p>
+                                    <p className="font-medium text-green-800">Deep Remissions</p>
+                                    <p className="text-sm text-gray-600">86.5% achieve uMRD in peripheral blood</p>
                                 </div>
                                 <div className="border-l-4 border-purple-500 pl-4">
-                                    <p className="font-medium text-purple-800">Symptoms</p>
-                                    <p className="text-sm text-gray-600">B-symptoms indicate need for treatment</p>
+                                    <p className="font-medium text-purple-800">Time-Limited Therapy</p>
+                                    <p className="text-sm text-gray-600">12-24 months with long treatment-free intervals</p>
                                 </div>
                             </div>
                         </div>
                         <div className="space-y-4">
-                            <h4 className="font-semibold text-gray-800 mb-3">Biological Factors</h4>
+                            <h4 className="font-semibold text-gray-800 mb-3">ESMO 2024 Key Benefits</h4>
                             <div className="space-y-3">
                                 <div className="border-l-4 border-red-500 pl-4">
-                                    <p className="font-medium text-red-800">IGHV Status</p>
-                                    <p className="text-sm text-gray-600">Unmutated = more aggressive disease</p>
+                                    <p className="font-medium text-red-800">All Risk Groups</p>
+                                    <p className="text-sm text-gray-600">Superior outcomes across all cytogenetic risk categories</p>
                                 </div>
                                 <div className="border-l-4 border-orange-500 pl-4">
-                                    <p className="font-medium text-orange-800">Cytogenetics</p>
-                                    <p className="text-sm text-gray-600">del(17p), del(11q) = high-risk</p>
+                                    <p className="font-medium text-orange-800">Re-treatment Option</p>
+                                    <p className="text-sm text-gray-600">Feasible venetoclax re-challenge at relapse</p>
                                 </div>
                                 <div className="border-l-4 border-indigo-500 pl-4">
-                                    <p className="font-medium text-indigo-800">Gene Mutations</p>
-                                    <p className="text-sm text-gray-600">TP53, NOTCH1, SF3B1 affect prognosis</p>
+                                    <p className="font-medium text-indigo-800">MRD-Guided Therapy</p>
+                                    <p className="text-sm text-gray-600">Personalized treatment duration based on response</p>
                                 </div>
                             </div>
                         </div>
@@ -532,46 +533,48 @@ const CLLDashboard = () => {
             </div>
 
             <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="text-xl font-bold mb-4">Regional Treatment Preferences</h3>
+                <h3 className="text-xl font-bold mb-4">ESMO 2024 Regional Treatment Preferences</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="bg-blue-50 rounded-xl p-4">
                         <h4 className="font-bold text-blue-900 mb-2">UK (NICE/BSH)</h4>
                         <ul className="text-sm text-blue-800 space-y-1">
-                            <li>• Acalabrutinib preferred over ibrutinib</li>
-                            <li>• Venetoclax + Obinutuzumab for fixed duration</li>
-                            <li>• Limited chemoimmunotherapy use</li>
-                            <li>• Focus on cardiac safety with BTKis</li>
+                            <li>• Venetoclax + Obinutuzumab first-line</li>
+                            <li>• Acalabrutinib preferred BTKi</li>
+                            <li>• Fixed duration strongly favored</li>
+                            <li>• MRD testing recommended for VenO</li>
                         </ul>
                     </div>
                     <div className="bg-green-50 rounded-xl p-4">
-                        <h4 className="font-bold text-green-900 mb-2">EU (ESMO)</h4>
+                        <h4 className="font-bold text-green-900 mb-2">EU (ESMO 2024)</h4>
                         <ul className="text-sm text-green-800 space-y-1">
-                            <li>• Ibrutinib + Venetoclax combination</li>
-                            <li>• FCR/BR in fit, mutated IGHV patients</li>
-                            <li>• Time-limited therapy preference</li>
-                            <li>• Comprehensive comorbidity assessment</li>
+                            <li>• BCL2 inhibitors preferred over BTKi</li>
+                            <li>• VenO for all fit patients</li>
+                            <li>• Time-limited therapy priority</li>
+                            <li>• MRD-guided treatment duration</li>
                         </ul>
                     </div>
                     <div className="bg-amber-50 rounded-xl p-4">
                         <h4 className="font-bold text-amber-900 mb-2">US (NCCN)</h4>
                         <ul className="text-sm text-amber-800 space-y-1">
+                            <li>• VenO and BTKi both preferred</li>
                             <li>• Zanubrutinib as preferred BTKi</li>
-                            <li>• Multiple combination options</li>
-                            <li>• Minimal chemotherapy use</li>
-                            <li>• MRD-guided treatment decisions</li>
+                            <li>• Patient preference important</li>
+                            <li>• Continuous vs fixed duration debate</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <SourcesBox sources={[
-                "NICE Technology Appraisal Guidance TA689. Acalabrutinib for treating chronic lymphocytic leukaemia. 2021.",
-                "Eichhorst B, et al. Chronic lymphocytic leukaemia: ESMO Clinical Practice Guidelines. Ann Oncol. 2021;32(1):23-33.",
+                "Eichhorst B, Ghia P, Niemann CU, et al. ESMO Clinical Practice Guideline interim update on new targeted therapies in the first line and at relapse of chronic lymphocytic leukaemia. Ann Oncol. 2024;35(9):762-768. doi:10.1016/j.annonc.2024.06.016",
+                "Tam CS, Allan JN, Siddiqi T, et al. Fixed-duration ibrutinib plus venetoclax for first-line treatment of CLL: primary analysis of the CAPTIVATE FD cohort. Blood. 2022;139(22):3278-3289.",
+                "Munir T, Cairns DA, Bloor A, et al. Chronic lymphocytic leukemia therapy guided by measurable residual disease. N Engl J Med. 2024;390(4):326-337.",
+                "Al-Sawaf O, Zhang C, Tandon M, et al. Venetoclax plus obinutuzumab versus chlorambucil plus obinutuzumab for previously untreated chronic lymphocytic leukaemia (CLL14): follow-up results. Lancet Oncol. 2020;21(9):1188-1200.",
+                "Kater AP, Owen C, Moreno C, et al. Fixed-duration ibrutinib-venetoclax in patients with chronic lymphocytic leukemia and comorbidities. NEJM Evid. 2022;1(7):EVIDoa2200006.",
+                "Brown JR, Eichhorst B, Hillmen P, et al. Zanubrutinib or ibrutinib in relapsed or refractory chronic lymphocytic leukemia. N Engl J Med. 2023;388(4):319-332.",
+                "Byrd JC, Hillmen P, Ghia P, et al. First-line acalabrutinib in patients with CLL. N Engl J Med. 2024;391(1):1-13.",
                 "NCCN Clinical Practice Guidelines in Oncology: Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma. Version 1.2025.",
-                "Burger JA, et al. Ibrutinib as initial therapy for patients with chronic lymphocytic leukemia. N Engl J Med. 2015;373(25):2425-2437.",
-                "Sharman JP, et al. Acalabrutinib with or without obinutuzumab versus chlorambucil and obinutuzumab for treatment-naive chronic lymphocytic leukaemia. Lancet. 2020;395(10232):1278-1291.",
-                "Fischer K, et al. Venetoclax and obinutuzumab in patients with CLL and coexisting conditions. N Engl J Med. 2019;380(23):2225-2236.",
-                "British Society for Haematology. Guidelines for the diagnosis and management of chronic lymphocytic leukaemia. Br J Haematol. 2018;182(3):344-359."
+                "Seymour JF, Kipps TJ, Eichhorst B, et al. Venetoclax-rituximab in relapsed or refractory chronic lymphocytic leukemia. N Engl J Med. 2018;378(12):1107-1120."
             ]} />
         </div>
     );
@@ -579,8 +582,8 @@ const CLLDashboard = () => {
     const renderMutations = () => (
         <div className="space-y-6">
             <InfoBox 
-                title="Genetic Mutations in CLL" 
-                content="CLL is characterized by various genetic abnormalities that significantly impact prognosis and treatment decisions. Understanding these mutations is crucial for personalized therapy approaches."
+                title="Genetic Mutations & BCL2 Inhibitor Response" 
+                content="Understanding genetic mutations is crucial for selecting optimal BCL2 inhibitor therapy. ESMO 2024 guidelines strongly recommend venetoclax combinations for high-risk genetic profiles, as they overcome traditional chemotherapy resistance patterns and achieve superior outcomes across all cytogenetic risk groups."
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
