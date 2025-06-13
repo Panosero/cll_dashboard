@@ -488,7 +488,7 @@ const CLLDashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div className="bg-green-50 rounded-lg p-4">
                                 <h4 className="font-semibold text-green-800 mb-3">Continuous BTK Inhibitors</h4>
                                 <div className="space-y-3">
@@ -507,12 +507,12 @@ const CLLDashboard = () => {
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div className="bg-yellow-50 rounded-lg p-4">
                             <h4 className="font-semibold text-yellow-800 mb-2">Key ESMO 2024 Principle</h4>
                             <p className="text-sm text-yellow-700">
-                                <strong>Equal Recommendation:</strong> Time-limited therapy is preferred when efficacy is similar, 
-                                but both approaches are equally valid. Treatment choice should consider patient factors, 
+                                <strong>Equal Recommendation:</strong> Time-limited therapy is preferred when efficacy is similar,
+                                but both approaches are equally valid. Treatment choice should consider patient factors,
                                 comorbidities, drug access, and individual preferences.
                             </p>
                         </div>
@@ -884,104 +884,135 @@ const CLLDashboard = () => {
     const renderTreatmentPlans = () => (
         <div className="space-y-6">
             <InfoBox>
-                <strong>ESMO 2024 Treatment Plans:</strong> Multiple effective first-line treatments are equally recommended. 
-                The guidelines emphasize patient-centered treatment selection considering IGHV status, TP53 mutations, 
+                <strong>ESMO 2024 Treatment Plans:</strong> Multiple effective first-line treatments are equally recommended.
+                The guidelines emphasize patient-centered treatment selection considering IGHV status, TP53 mutations,
                 patient fitness, comorbidities, and preferences. Both time-limited and continuous therapies are valid approaches.
             </InfoBox>
 
+            {/* Hierarchical Treatment Decision Flowchart */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">ESMO 2024 First-Line Recommendations by Patient Group</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-6 text-center">ESMO 2024 Treatment Decision Flowchart</h3>
                 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                    <div className="border border-green-200 rounded-lg p-4">
-                        <h4 className="font-semibold text-green-800 mb-3">Fit/Younger Patients with Mutated IGHV (No TP53 aberrations)</h4>
-                        <div className="space-y-2 text-sm">
-                            <div className="bg-green-50 p-2 rounded">
-                                <strong>Equally Recommended Options [I, A]:</strong>
-                            </div>
-                            <ul className="text-green-700 space-y-1 ml-4">
-                                <li>• Venetoclax + Obinutuzumab</li>
-                                <li>• Ibrutinib + Venetoclax</li>
-                                <li>• Ibrutinib ± Rituximab</li>
-                                <li>• Acalabrutinib ± Obinutuzumab</li>
-                                <li>• Zanubrutinib</li>
-                                <li>• FCR (with secondary neoplasia discussion) [I, B]</li>
-                            </ul>
-                        </div>
+                {/* Root Node - CLL Diagnosis */}
+                <div className="flex flex-col items-center">
+                    <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg p-4 mb-6 shadow-lg">
+                        <h4 className="font-bold text-lg text-center">CLL Diagnosis Confirmed</h4>
+                        <p className="text-sm text-center text-blue-100 mt-1">IGHV status & TP53 testing mandatory</p>
                     </div>
-                    
-                    <div className="border border-blue-200 rounded-lg p-4">
-                        <h4 className="font-semibold text-blue-800 mb-3">Unfit/Older Patients with Mutated IGHV (No TP53 aberrations)</h4>
-                        <div className="space-y-2 text-sm">
-                            <div className="bg-blue-50 p-2 rounded">
-                                <strong>Equally Recommended Options [I, A]:</strong>
-                            </div>
-                            <ul className="text-blue-700 space-y-1 ml-4">
-                                <li>• Venetoclax + Obinutuzumab</li>
-                                <li>• Acalabrutinib ± Obinutuzumab</li>
-                                <li>• Zanubrutinib</li>
-                                <li>• Ibrutinib (with cardiac assessment) [I, A]</li>
-                                <li>• Ibrutinib + Venetoclax (with cardiac assessment) [I, B]</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                    <div className="border border-orange-200 rounded-lg p-4">
-                        <h4 className="font-semibold text-orange-800 mb-3">Fit/Younger Patients with Unmutated IGHV (No TP53 aberrations)</h4>
-                        <div className="space-y-2 text-sm">
-                            <div className="bg-orange-50 p-2 rounded">
-                                <strong>Recommended Options:</strong>
-                            </div>
-                            <ul className="text-orange-700 space-y-1 ml-4">
-                                <li>• Ibrutinib + Venetoclax [I, A]</li>
-                                <li>• Ibrutinib ± Rituximab [I, A]</li>
-                                <li>• Acalabrutinib ± Obinutuzumab [III, A]</li>
-                                <li>• Zanubrutinib [III, A]</li>
-                                <li>• Venetoclax + Obinutuzumab as alternative [I, A]</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div className="border border-red-200 rounded-lg p-4">
-                        <h4 className="font-semibold text-red-800 mb-3">Patients with TP53 mutation/del(17p)</h4>
-                        <div className="space-y-2 text-sm">
-                            <div className="bg-red-50 p-2 rounded">
-                                <strong>Preferred BTK Inhibitors:</strong>
-                            </div>
-                            <ul className="text-red-700 space-y-1 ml-4">
-                                <li>• Acalabrutinib [I, A]</li>
-                                <li>• Zanubrutinib [III, A]</li>
-                                <li>• Ibrutinib [I, A]</li>
-                            </ul>
-                            <div className="bg-red-50 p-2 rounded mt-2">
-                                <strong>Alternative Options:</strong>
-                            </div>
-                            <ul className="text-red-700 space-y-1 ml-4">
-                                <li>• Venetoclax (continuous) [III, A]</li>
-                                <li>• Ibrutinib + Venetoclax [III, A]</li>
-                                <li>• Venetoclax + Obinutuzumab [III, A]</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                    {/* First Decision Branch - TP53 Status */}
+                    <div className="relative mb-6">
+                        {/* Connecting Line */}
+                        <div className="absolute left-1/2 transform -translate-x-px top-0 h-6 w-0.5 bg-gray-400"></div>
+                        
+                        <div className="flex items-center gap-8 mt-6">
+                            {/* TP53 Wild Type Branch */}
+                            <div className="flex flex-col items-center">
+                                <div className="bg-green-100 border-2 border-green-300 rounded-lg p-3 mb-4">
+                                    <h5 className="font-semibold text-green-800 text-center">TP53 Wild Type</h5>
+                                    <p className="text-xs text-green-600 text-center">(~95% of patients)</p>
+                                </div>
 
-                <div className="bg-yellow-50 border border-yellow-300 rounded-lg p-4">
-                    <h4 className="font-semibold text-yellow-800 mb-2">Key Selection Factors (ESMO 2024)</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                        <ul className="text-yellow-700 space-y-1">
-                            <li>• <strong>Time-limited therapy preferred</strong> when efficacy is similar</li>
-                            <li>• Side-effect profile considerations</li>
-                            <li>• Drug administration route preferences</li>
-                            <li>• Access and monitoring intensity</li>
-                        </ul>
-                        <ul className="text-yellow-700 space-y-1">
-                            <li>• Cardiovascular comorbidities (favor acalabrutinib/zanubrutinib)</li>
-                            <li>• Renal function (tumor lysis syndrome risk)</li>
-                            <li>• Patient preference and lifestyle</li>
-                            <li>• Treatment adherence expectations</li>
-                        </ul>
+                                {/* IGHV Status Branch */}
+                                <div className="flex gap-6">
+                                    {/* Mutated IGHV */}
+                                    <div className="flex flex-col items-center">
+                                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
+                                            <h6 className="font-medium text-blue-800 text-sm text-center">Mutated IGHV</h6>
+                                            <p className="text-xs text-blue-600 text-center">(~60%)</p>
+                                        </div>
+
+                                        {/* Fitness Assessment */}
+                                        <div className="flex gap-3">
+                                            {/* Fit Patients */}
+                                            <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm max-w-xs">
+                                                <h7 className="font-medium text-gray-800 text-xs mb-2 block">Fit/Younger</h7>
+                                                <div className="space-y-1 text-xs">
+                                                    <div className="bg-green-50 p-1 rounded text-green-700">• VenO [I,A]</div>
+                                                    <div className="bg-purple-50 p-1 rounded text-purple-700">• Ibr+Ven [I,A]</div>
+                                                    <div className="bg-blue-50 p-1 rounded text-blue-700">• Acala±Obi [III,A]</div>
+                                                    <div className="bg-indigo-50 p-1 rounded text-indigo-700">• Zanu [III,A]</div>
+                                                    <div className="bg-gray-50 p-1 rounded text-gray-700">• FCR [I,B]</div>
+                                                </div>
+                                            </div>
+
+                                            {/* Unfit Patients */}
+                                            <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm max-w-xs">
+                                                <h7 className="font-medium text-gray-800 text-xs mb-2 block">Unfit/Older</h7>
+                                                <div className="space-y-1 text-xs">
+                                                    <div className="bg-green-50 p-1 rounded text-green-700">• VenO [I,A]</div>
+                                                    <div className="bg-blue-50 p-1 rounded text-blue-700">• Acala±Obi [I,A]</div>
+                                                    <div className="bg-indigo-50 p-1 rounded text-indigo-700">• Zanu [I,A]</div>
+                                                    <div className="bg-orange-50 p-1 rounded text-orange-700">• Ibr (cardiac) [I,A]</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Unmutated IGHV */}
+                                    <div className="flex flex-col items-center">
+                                        <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 mb-3">
+                                            <h6 className="font-medium text-orange-800 text-sm text-center">Unmutated IGHV</h6>
+                                            <p className="text-xs text-orange-600 text-center">(~40%)</p>
+                                        </div>
+
+                                        {/* Treatment Options for Unmutated */}
+                                        <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm max-w-xs">
+                                            <h7 className="font-medium text-gray-800 text-xs mb-2 block">All Patients</h7>
+                                            <div className="space-y-1 text-xs">
+                                                <div className="bg-purple-50 p-1 rounded text-purple-700 font-medium">• Ibr+Ven [I,A] ★</div>
+                                                <div className="bg-gray-50 p-1 rounded text-gray-700">• Ibr±Rit [I,A]</div>
+                                                <div className="bg-blue-50 p-1 rounded text-blue-700">• Acala±Obi [III,A]</div>
+                                                <div className="bg-indigo-50 p-1 rounded text-indigo-700">• Zanu [III,A]</div>
+                                                <div className="bg-green-50 p-1 rounded text-green-700">• VenO (alt) [I,A]</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* TP53 Aberrant Branch */}
+                            <div className="flex flex-col items-center">
+                                <div className="bg-red-100 border-2 border-red-300 rounded-lg p-3 mb-4">
+                                    <h5 className="font-semibold text-red-800 text-center">TP53 Aberrant</h5>
+                                    <p className="text-xs text-red-600 text-center">(~5% of patients)</p>
+                                </div>
+
+                                {/* TP53 Treatment Options */}
+                                <div className="bg-white border border-red-200 rounded-lg p-3 shadow-sm max-w-xs">
+                                    <h7 className="font-medium text-red-800 text-xs mb-2 block">Preferred BTKi</h7>
+                                    <div className="space-y-1 text-xs">
+                                        <div className="bg-blue-50 p-1 rounded text-blue-700 font-medium">• Acala [I,A] ★</div>
+                                        <div className="bg-indigo-50 p-1 rounded text-indigo-700 font-medium">• Zanu [III,A] ★</div>
+                                        <div className="bg-gray-50 p-1 rounded text-gray-700">• Ibr [I,A]</div>
+                                    </div>
+                                    <h7 className="font-medium text-red-800 text-xs mt-3 mb-1 block">Alternatives</h7>
+                                    <div className="space-y-1 text-xs">
+                                        <div className="bg-green-50 p-1 rounded text-green-700">• Ven (cont) [III,A]</div>
+                                        <div className="bg-purple-50 p-1 rounded text-purple-700">• Ibr+Ven [III,A]</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Legend */}
+                    <div className="mt-8 p-4 bg-gray-50 rounded-lg w-full">
+                        <h4 className="font-semibold text-gray-800 mb-3 text-center">Treatment Abbreviations & Key</h4>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                            <div><strong>VenO:</strong> Venetoclax + Obinutuzumab</div>
+                            <div><strong>Ibr+Ven:</strong> Ibrutinib + Venetoclax</div>
+                            <div><strong>Acala:</strong> Acalabrutinib ± Obinutuzumab</div>
+                            <div><strong>Zanu:</strong> Zanubrutinib</div>
+                            <div><strong>Ibr:</strong> Ibrutinib ± Rituximab</div>
+                            <div><strong>FCR:</strong> Fludarabine+Cyclophosphamide+Rituximab</div>
+                            <div><strong>★:</strong> Preferred option</div>
+                            <div><strong>[I,A]:</strong> High evidence level</div>
+                        </div>
+                        <div className="mt-3 p-2 bg-yellow-50 rounded text-xs">
+                            <strong>Key Principle:</strong> Time-limited therapy preferred when efficacy is similar. 
+                            Final selection based on patient factors, comorbidities, and preferences.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1036,7 +1067,14 @@ const CLLDashboard = () => {
             {/* Navigation */}
             <div className="bg-white shadow-sm sticky top-0 z-10">
                 <div className="max-w-7xl mx-auto px-4">
-                    <div className="flex overflow-x-auto space-x-1 py-4">
+                    <div 
+                        className="flex flex-wrap justify-center gap-1 py-4" 
+                        style={{
+                            scrollbarWidth: 'none', 
+                            msOverflowStyle: 'none',
+                            WebkitScrollbar: { display: 'none' }
+                        }}
+                    >
                         {navigation.map((item) => {
                             const Icon = item.icon;
                             return (
