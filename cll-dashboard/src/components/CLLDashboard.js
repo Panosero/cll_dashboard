@@ -892,7 +892,7 @@ const CLLDashboard = () => {
             {/* Hierarchical Treatment Decision Flowchart */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
                 <h3 className="text-xl font-semibold text-gray-800 mb-6 text-center">ESMO 2024 Treatment Decision Flowchart</h3>
-                
+
                 {/* Simplified Hierarchical Layout */}
                 <div className="flex flex-col items-center space-y-8">
                     {/* Root Node */}
@@ -1021,7 +1021,7 @@ const CLLDashboard = () => {
                             <div><strong>[I,A]:</strong> High evidence level</div>
                         </div>
                         <div className="mt-3 p-2 bg-yellow-50 rounded text-xs">
-                            <strong>Key Principle:</strong> Time-limited therapy preferred when efficacy is similar. 
+                            <strong>Key Principle:</strong> Time-limited therapy preferred when efficacy is similar.
                             Final selection based on patient factors, comorbidities, and preferences.
                         </div>
                     </div>
@@ -1042,92 +1042,92 @@ const CLLDashboard = () => {
         </div>
     );
 
-const navigation = [
-    { id: 'overview', label: 'Overview', icon: Activity },
-    { id: 'gender', label: 'Gender Distribution', icon: Users },
-    { id: 'aging', label: 'Aging Impact', icon: TrendingUp },
-    { id: 'mutations', label: 'Mutations & Genetics', icon: Dna },
-    { id: 'treatments', label: 'Treatments', icon: Pill },
-    { id: 'treatment-plans', label: 'ESMO 2024 Treatment Plans', icon: Pill },
-    { id: 'info', label: 'General Information', icon: BookOpen }
-];
+    const navigation = [
+        { id: 'overview', label: 'Overview', icon: Activity },
+        { id: 'gender', label: 'Gender Distribution', icon: Users },
+        { id: 'aging', label: 'Aging Impact', icon: TrendingUp },
+        { id: 'mutations', label: 'Mutations & Genetics', icon: Dna },
+        { id: 'treatments', label: 'Treatments', icon: Pill },
+        { id: 'treatment-plans', label: 'ESMO 2024 Treatment Plans', icon: Pill },
+        { id: 'info', label: 'General Information', icon: BookOpen }
+    ];
 
-return (
-    <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-            <div className="max-w-7xl mx-auto px-4 py-8">
-                <div className="flex justify-between items-start">
-                    <div>
-                        <h1 className="text-3xl md:text-4xl font-bold mb-2">
-                            Chronic Lymphocytic Leukemia Statistics
-                        </h1>
-                        <p className="text-blue-100 text-lg">
-                            UK Focus with International Comparisons • 2025 Data
-                        </p>
-                    </div>
-                    <div className="text-right">
-                        <span className="inline-block bg-blue-700 bg-opacity-50 rounded-full px-3 py-1 text-xs font-medium text-blue-100">
-                            v1.0.0
-                        </span>
+    return (
+        <div className="min-h-screen bg-gray-50">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+                <div className="max-w-7xl mx-auto px-4 py-8">
+                    <div className="flex justify-between items-start">
+                        <div>
+                            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                                Chronic Lymphocytic Leukemia Statistics
+                            </h1>
+                            <p className="text-blue-100 text-lg">
+                                UK Focus with International Comparisons • 2025 Data
+                            </p>
+                        </div>
+                        <div className="text-right">
+                            <span className="inline-block bg-blue-700 bg-opacity-50 rounded-full px-3 py-1 text-xs font-medium text-blue-100">
+                                v1.0.0
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        {/* Navigation */}
-        <div className="bg-white shadow-sm sticky top-0 z-10">
-            <div className="max-w-7xl mx-auto px-4">
-                <div
-                    className="flex flex-wrap justify-center gap-1 py-4"
-                    style={{
-                        scrollbarWidth: 'none',
-                        msOverflowStyle: 'none',
-                        WebkitScrollbar: { display: 'none' }
-                    }}
-                >
-                    {navigation.map((item) => {
-                        const Icon = item.icon;
-                        return (
-                            <button
-                                key={item.id}
-                                onClick={() => setActiveSection(item.id)}
-                                className={`flex items-center px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${activeSection === item.id
-                                    ? 'bg-blue-100 text-blue-700'
-                                    : 'text-gray-600 hover:bg-gray-100'
-                                    }`}
-                            >
-                                <Icon className="w-4 h-4 mr-2" />
-                                {item.label}
-                            </button>
-                        );
-                    })}
+            {/* Navigation */}
+            <div className="bg-white shadow-sm sticky top-0 z-10">
+                <div className="max-w-7xl mx-auto px-4">
+                    <div
+                        className="flex flex-wrap justify-center gap-1 py-4"
+                        style={{
+                            scrollbarWidth: 'none',
+                            msOverflowStyle: 'none',
+                            WebkitScrollbar: { display: 'none' }
+                        }}
+                    >
+                        {navigation.map((item) => {
+                            const Icon = item.icon;
+                            return (
+                                <button
+                                    key={item.id}
+                                    onClick={() => setActiveSection(item.id)}
+                                    className={`flex items-center px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${activeSection === item.id
+                                        ? 'bg-blue-100 text-blue-700'
+                                        : 'text-gray-600 hover:bg-gray-100'
+                                        }`}
+                                >
+                                    <Icon className="w-4 h-4 mr-2" />
+                                    {item.label}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+
+            {/* Content */}
+            <div className="max-w-7xl mx-auto px-4 py-8">
+                {activeSection === 'overview' && renderOverview()}
+                {activeSection === 'gender' && renderGenderDistribution()}
+                {activeSection === 'aging' && renderAgingImpact()}
+                {activeSection === 'mutations' && renderMutations()}
+                {activeSection === 'treatments' && renderTreatments()}
+                {activeSection === 'treatment-plans' && renderTreatmentPlans()}
+                {activeSection === 'info' && renderGeneralInfo()}
+            </div>
+
+            {/* Footer */}
+            <div className="bg-gray-800 text-gray-300 mt-12">
+                <div className="max-w-7xl mx-auto px-4 py-8">
+                    <p className="text-sm">
+                        Data sources: Cancer Research UK, SEER, BSH Guidelines, ESMO Guidelines, NCCN Guidelines.
+                        Last updated: June 2025
+                    </p>
                 </div>
             </div>
         </div>
-
-        {/* Content */}
-        <div className="max-w-7xl mx-auto px-4 py-8">
-            {activeSection === 'overview' && renderOverview()}
-            {activeSection === 'gender' && renderGenderDistribution()}
-            {activeSection === 'aging' && renderAgingImpact()}
-            {activeSection === 'mutations' && renderMutations()}
-            {activeSection === 'treatments' && renderTreatments()}
-            {activeSection === 'treatment-plans' && renderTreatmentPlans()}
-            {activeSection === 'info' && renderGeneralInfo()}
-        </div>
-
-        {/* Footer */}
-        <div className="bg-gray-800 text-gray-300 mt-12">
-            <div className="max-w-7xl mx-auto px-4 py-8">
-                <p className="text-sm">
-                    Data sources: Cancer Research UK, SEER, BSH Guidelines, ESMO Guidelines, NCCN Guidelines.
-                    Last updated: June 2025
-                </p>
-            </div>
-        </div>
-    </div>
-);
+    );
 };
 
 export default CLLDashboard;
