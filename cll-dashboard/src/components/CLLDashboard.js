@@ -804,12 +804,21 @@ const CLLDashboard = () => {
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
                 <div className="max-w-7xl mx-auto px-4 py-8">
-                    <h1 className="text-3xl md:text-4xl font-bold mb-2">
-                        Chronic Lymphocytic Leukemia Statistics
-                    </h1>
-                    <p className="text-blue-100 text-lg">
-                        UK Focus with International Comparisons • 2025 Data
-                    </p>
+                    <div className="flex justify-between items-start">
+                        <div>
+                            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                                Chronic Lymphocytic Leukemia Statistics
+                            </h1>
+                            <p className="text-blue-100 text-lg">
+                                UK Focus with International Comparisons • 2025 Data
+                            </p>
+                        </div>
+                        <div className="text-right">
+                            <span className="inline-block bg-blue-700 bg-opacity-50 rounded-full px-3 py-1 text-xs font-medium text-blue-100">
+                                v1.0.0
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
