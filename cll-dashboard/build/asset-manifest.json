@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/cll_dashboard/static/css/main.0ee79243.css",
+    "main.js": "/cll_dashboard/static/js/main.ec48b798.js",
+    "index.html": "/cll_dashboard/index.html",
+    "main.0ee79243.css.map": "/cll_dashboard/static/css/main.0ee79243.css.map",
+    "main.ec48b798.js.map": "/cll_dashboard/static/js/main.ec48b798.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0ee79243.css",
+    "static/js/main.ec48b798.js"
+  ]
+}
