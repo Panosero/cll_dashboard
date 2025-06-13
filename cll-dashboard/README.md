@@ -68,7 +68,7 @@ This project is configured for automatic deployment to GitHub Pages using GitHub
 
 4. **The deployment will run automatically** when you push to the main branch. You can monitor the progress in the "Actions" tab of your repository.
 
-5. **Access your deployed app** at: `https://YOUR_USERNAME.github.io/cll_dashboard`
+5. **Access your deployed app** at: `https://Panosero.github.io/cll_dashboard`
 
 ### Manual Deployment (Alternative)
 
