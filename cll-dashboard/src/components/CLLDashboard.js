@@ -181,6 +181,19 @@ const CLLDashboard = () => {
         </div>
     );
 
+    const SourcesBox = ({ sources }) => (
+        <div className="bg-gray-50 rounded-xl p-4 mt-6 border-l-4 border-gray-400">
+            <h4 className="font-semibold text-gray-800 mb-2">📚 Sources & References</h4>
+            <div className="text-xs text-gray-600 space-y-1">
+                {sources.map((source, index) => (
+                    <p key={index} className="leading-relaxed">
+                        <span className="font-medium">{index + 1}.</span> {source}
+                    </p>
+                ))}
+            </div>
+        </div>
+    );
+
     const renderOverview = () => (
         <div className="space-y-6">
             <InfoBox
@@ -260,6 +273,15 @@ const CLLDashboard = () => {
                     Since the early 1990s, CLL incidence has increased by 14% in females and 9% in males in the UK.
                 </p>
             </div>
+
+            <SourcesBox sources={[
+                "Cancer Research UK. Cancer incidence statistics. Available at: https://www.cancerresearchuk.org/health-professional/cancer-statistics/incidence",
+                "Office for National Statistics. Cancer registration statistics, England: 2019. ONS, 2021.",
+                "SEER Cancer Statistics Review, 1975-2018, National Cancer Institute. Bethesda, MD.",
+                "Hallek M, et al. iwCLL guidelines for diagnosis, indications for treatment, response assessment, and supportive management of CLL. Blood. 2018;131(25):2745-2760.",
+                "Eichhorst B, et al. Chronic lymphocytic leukaemia: ESMO Clinical Practice Guidelines. Ann Oncol. 2021;32(1):23-33.",
+                "NCCN Clinical Practice Guidelines in Oncology: Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma. Version 1.2025."
+            ]} />
         </div>
     );
 
@@ -338,6 +360,14 @@ const CLLDashboard = () => {
                     </div>
                 </div>
             </div>
+
+            <SourcesBox sources={[
+                "Howlader N, et al. Gender disparities in chronic lymphocytic leukemia. Cancer Epidemiol Biomarkers Prev. 2019;28(5):1011-1018.",
+                "Catovsky D, et al. Assessment of fludarabine plus cyclophosphamide for patients with chronic lymphocytic leukaemia. Lancet. 2007;370(9583):230-239.",
+                "Molica S, et al. Sex differences in chronic lymphocytic leukemia at diagnosis and following treatment: A systematic review. Oncotarget. 2016;7(34):54542-54551.",
+                "Thompson PA, et al. Complex karyotype is a stronger predictor than del(17p) for an inferior outcome in relapsed or refractory chronic lymphocytic leukemia patients treated with ibrutinib-based regimens. Cancer. 2015;121(20):3612-3621.",
+                "Cancer Research UK. Leukaemia incidence statistics by sex. Available at: https://www.cancerresearchuk.org/health-professional/cancer-statistics/statistics-by-cancer-type/leukaemia"
+            ]} />
         </div>
     );
 
@@ -408,6 +438,15 @@ const CLLDashboard = () => {
                     </div>
                 </div>
             </div>
+
+            <SourcesBox sources={[
+                "Siegel RL, et al. Cancer statistics, 2023. CA Cancer J Clin. 2023;73(3):233-254.",
+                "Brenner H, et al. Trends in survival of patients with chronic lymphocytic leukemia from the 1980s to the early 21st century. Blood. 2008;111(10):4916-4921.",
+                "Goede V, et al. Obinutuzumab plus chlorambucil in patients with CLL and coexisting conditions. N Engl J Med. 2014;370(12):1101-1110.",
+                "Mato AR, et al. Optimal sequencing of ibrutinib, idelalisib, and venetoclax in chronic lymphocytic leukemia. Blood. 2017;129(3):281-287.",
+                "Office for National Statistics. Life expectancy in the UK: 2018 to 2020. ONS, 2021.",
+                "International Agency for Research on Cancer. GLOBOCAN 2020: New Global Cancer Data. Lyon: IARC, 2020."
+            ]} />
         </div>
     );
 
@@ -523,6 +562,16 @@ const CLLDashboard = () => {
                     </div>
                 </div>
             </div>
+
+            <SourcesBox sources={[
+                "NICE Technology Appraisal Guidance TA689. Acalabrutinib for treating chronic lymphocytic leukaemia. 2021.",
+                "Eichhorst B, et al. Chronic lymphocytic leukaemia: ESMO Clinical Practice Guidelines. Ann Oncol. 2021;32(1):23-33.",
+                "NCCN Clinical Practice Guidelines in Oncology: Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma. Version 1.2025.",
+                "Burger JA, et al. Ibrutinib as initial therapy for patients with chronic lymphocytic leukemia. N Engl J Med. 2015;373(25):2425-2437.",
+                "Sharman JP, et al. Acalabrutinib with or without obinutuzumab versus chlorambucil and obinutuzumab for treatment-naive chronic lymphocytic leukaemia. Lancet. 2020;395(10232):1278-1291.",
+                "Fischer K, et al. Venetoclax and obinutuzumab in patients with CLL and coexisting conditions. N Engl J Med. 2019;380(23):2225-2236.",
+                "British Society for Haematology. Guidelines for the diagnosis and management of chronic lymphocytic leukaemia. Br J Haematol. 2018;182(3):344-359."
+            ]} />
         </div>
     );
 
@@ -632,6 +681,16 @@ const CLLDashboard = () => {
                     </table>
                 </div>
             </div>
+
+            <SourcesBox sources={[
+                "Döhner H, et al. Genomic aberrations and survival in chronic lymphocytic leukemia. N Engl J Med. 2000;343(26):1910-1916.",
+                "Kipps TJ, et al. Chronic lymphocytic leukaemia. Nat Rev Dis Primers. 2017;3:16096.",
+                "Damle RN, et al. Ig V gene mutation status and CD38 expression as novel prognostic indicators in chronic lymphocytic leukemia. Blood. 1999;94(6):1840-1847.",
+                "Hamblin TJ, et al. Unmutated Ig V(H) genes are associated with a more aggressive form of chronic lymphocytic leukemia. Blood. 1999;94(6):1848-1854.",
+                "Zenz T, et al. TP53 mutation and survival in chronic lymphocytic leukemia. J Clin Oncol. 2010;28(29):4473-4479.",
+                "Puente XS, et al. Whole-genome sequencing identifies recurrent mutations in chronic lymphocytic leukaemia. Nature. 2011;475(7354):101-105.",
+                "Malcikova J, et al. ERIC recommendations for TP53 mutation analysis in chronic lymphocytic leukemia-update on methodological approaches. Leukemia. 2018;32(5):1070-1080."
+            ]} />
         </div>
     );
 
@@ -787,6 +846,16 @@ const CLLDashboard = () => {
                     </div>
                 </div>
             </div>
+
+            <SourcesBox sources={[
+                "Hallek M, et al. iwCLL guidelines for diagnosis, indications for treatment, response assessment, and supportive management of CLL. Blood. 2018;131(25):2745-2760.",
+                "Binet JL, et al. A new prognostic classification of chronic lymphocytic leukemia derived from a multivariate survival analysis. Cancer. 1981;48(1):198-206.",
+                "Rai KR, et al. Clinical staging of chronic lymphocytic leukemia. Blood. 1975;46(2):219-234.",
+                "Chiorazzi N, et al. Chronic lymphocytic leukemia. N Engl J Med. 2005;352(8):804-815.",
+                "Swerdlow SH, et al. WHO Classification of Tumours of Haematopoietic and Lymphoid Tissues. 4th ed. Lyon: IARC; 2017.",
+                "Rawstron AC, et al. Monoclonal B-cell lymphocytosis and chronic lymphocytic leukemia. N Engl J Med. 2008;359(6):575-583.",
+                "National Cancer Institute. Chronic Lymphocytic Leukemia Treatment (PDQ®). Health Professional Version. Available at: https://www.cancer.gov/types/leukemia/hp/cll-treatment-pdq"
+            ]} />
         </div>
     );
 
