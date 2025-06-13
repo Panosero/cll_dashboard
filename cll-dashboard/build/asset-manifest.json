@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/cll_dashboard/static/css/main.0ee79243.css",
-    "main.js": "/cll_dashboard/static/js/main.f8441e98.js",
+    "main.js": "/cll_dashboard/static/js/main.7ec96745.js",
     "index.html": "/cll_dashboard/index.html",
     "main.0ee79243.css.map": "/cll_dashboard/static/css/main.0ee79243.css.map",
-    "main.f8441e98.js.map": "/cll_dashboard/static/js/main.f8441e98.js.map"
+    "main.7ec96745.js.map": "/cll_dashboard/static/js/main.7ec96745.js.map"
   },
   "entrypoints": [
     "static/css/main.0ee79243.css",
-    "static/js/main.f8441e98.js"
+    "static/js/main.7ec96745.js"
   ]
 }

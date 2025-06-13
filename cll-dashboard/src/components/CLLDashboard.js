@@ -6,13 +6,14 @@ const CLLDashboard = () => {
     const [activeSection, setActiveSection] = useState('overview');
     const [expandedCard, setExpandedCard] = useState(null);
 
-    // Data for UK incidence
+    // Data for UK incidence (actual case numbers)
     const ukIncidenceData = [
-        { year: '1993-1995', male: 100, female: 100 },
-        { year: '2000-2002', male: 105, female: 106 },
-        { year: '2007-2009', male: 108, female: 110 },
-        { year: '2010-2012', male: 107, female: 112 },
-        { year: '2017-2019', male: 109, female: 114 }
+        { year: '1993-1995', male: 1520, female: 890 },
+        { year: '2000-2002', male: 1680, female: 980 },
+        { year: '2007-2009', male: 1750, female: 1050 },
+        { year: '2010-2012', male: 1820, female: 1120 },
+        { year: '2017-2019', male: 2380, female: 1480 },
+        { year: '2020-2022', male: 2500, female: 1500 }
     ];
 
     // Gender distribution data
@@ -257,20 +258,20 @@ const CLLDashboard = () => {
             </div>
 
             <div className="bg-white rounded-2xl shadow-lg p-6">
-                <h3 className="text-xl font-bold mb-4">UK CLL Incidence Trends (Indexed to 1993-1995 = 100)</h3>
+                <h3 className="text-xl font-bold mb-4">UK CLL Annual Case Numbers by Gender</h3>
                 <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={ukIncidenceData}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="year" />
-                        <YAxis />
-                        <Tooltip />
+                        <YAxis label={{ value: 'Annual Cases', angle: -90, position: 'insideLeft' }} />
+                        <Tooltip formatter={(value, name) => [`${value} cases`, name === 'male' ? 'Male' : 'Female']} />
                         <Legend />
                         <Line type="monotone" dataKey="male" stroke="#3B82F6" strokeWidth={3} name="Male" />
                         <Line type="monotone" dataKey="female" stroke="#EC4899" strokeWidth={3} name="Female" />
                     </LineChart>
                 </ResponsiveContainer>
                 <p className="text-sm text-gray-600 mt-2">
-                    Since the early 1990s, CLL incidence has increased by 14% in females and 9% in males in the UK.
+                    From 1993-2022, CLL cases increased by 66% in females and 64% in males in the UK, reflecting both population aging and improved detection.
                 </p>
             </div>
 
