@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, AreaChart, Area } from 'recharts';
-import { Calendar, Users, TrendingUp, Heart, Globe, Pill, Activity, ChevronDown, ChevronUp, Info } from 'lucide-react';
+import { Calendar, Users, TrendingUp, Pill, Activity, ChevronDown, ChevronUp, Info } from 'lucide-react';
 
 const CLLDashboard = () => {
     const [activeSection, setActiveSection] = useState('overview');
